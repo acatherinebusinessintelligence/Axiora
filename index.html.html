@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Axiora | Desarrollo humano, catalización e IA aplicada</title>
+  <meta name="description" content="Axiora es una metodología experiencial para desarrollo humano y equipos corporativos, potenciada con IA personalizable y una red de Catalizadores Axiora.">
+  <style>
+    :root{
+      --bg:#f7f3ec;
+      --panel:#ffffff;
+      --soft:#f4ede2;
+      --line:#ddd2c2;
+      --text:#2f2a25;
+      --muted:#6f685f;
+      --accent:#7b5e3b;
+      --accent-dark:#5e4528;
+      --accent-soft:#efe4d3;
+      --shadow:0 16px 40px rgba(0,0,0,.08);
+      --radius:24px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:radial-gradient(circle at top left,#fbf8f2 0,#f7f3ec 38%,#f3ede3 100%);
+      color:var(--text);
+    }
+
+    img{max-width:100%;display:block}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 22px 60px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:10px 0 22px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      letter-spacing:.5px;
+      box-shadow:var(--shadow);
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:22px;
+      line-height:1;
+    }
+
+    .brand p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav a,.btn{
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      padding:11px 15px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:24px;
+      align-items:stretch;
+      margin-top:8px;
+    }
+
+    .hero-copy,.hero-visual{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:32px;
+      box-shadow:var(--shadow);
+    }
+
+    .hero-copy{
+      padding:34px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.94)),
+        radial-gradient(circle at top right, rgba(123,94,59,.10), transparent 34%);
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:var(--accent-dark);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.4px;
+      text-transform:uppercase;
+    }
+
+    .hero h2{
+      margin:18px 0 14px;
+      font-size:46px;
+      line-height:1.04;
+      letter-spacing:-1.2px;
+    }
+
+    .hero p.lead{
+      margin:0 0 18px;
+      font-size:18px;
+      line-height:1.65;
+      color:#433c35;
+    }
+
+    .hero-points{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin:20px 0 24px;
+    }
+
+    .mini-card{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:18px;
+      padding:14px;
+    }
+
+    .mini-card strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:14px;
+    }
+
+    .mini-card span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .hero-visual{
+      padding:20px;
+      display:grid;
+      gap:16px;
+      background:linear-gradient(180deg,#fff,#faf6ef);
+    }
+
+    .image-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      min-height:180px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg, rgba(123,94,59,.12), rgba(123,94,59,.02)), linear-gradient(180deg, #f8f3ea, #efe6d8);
+    }
+
+    .image-card.large{min-height:250px}
+
+    .image-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .image-card.fallback::before{
+      content:"Axiora";
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:18px;
+      font-size:28px;
+      font-weight:900;
+      color:var(--accent-dark);
+    }
+
+    .image-card.fallback::after{
+      content:"Espacio listo para imagen del programa, sesiones, tablero o catalización.";
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:52px;
+      font-size:13px;
+      color:#5f554a;
+      line-height:1.5;
+      max-width:75%;
+    }
+
+    .image-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .section{
+      margin-top:28px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:30px;
+    }
+
+    .section h3{
+      margin:0 0 10px;
+      font-size:30px;
+      letter-spacing:-.6px;
+    }
+
+    .section > p.intro{
+      margin:0 0 22px;
+      color:#4b443d;
+      font-size:17px;
+      line-height:1.65;
+      max-width:900px;
+    }
+
+    .grid{
+      display:grid;
+      gap:18px;
+    }
+
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:#fff;
+      padding:22px;
+    }
+
+    .card h4{
+      margin:0 0 10px;
+      font-size:19px;
+    }
+
+    .card p{
+      margin:0;
+      color:#564f47;
+      line-height:1.62;
+      font-size:15px;
+    }
+
+    .card ul{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:#564f47;
+      line-height:1.6;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:7px 10px;
+      border-radius:999px;
+      background:var(--soft);
+      color:var(--accent-dark);
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .highlight{
+      background:linear-gradient(180deg,#fff,#fbf8f2);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px;
+    }
+
+    .highlight strong{
+      display:block;
+      font-size:24px;
+      margin-bottom:10px;
+      color:var(--accent-dark);
+    }
+
+    .steps .card{
+      position:relative;
+      padding-top:58px;
+    }
+
+    .step-number{
+      position:absolute;
+      top:18px;
+      left:18px;
+      width:30px;
+      height:30px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-size:14px;
+      font-weight:900;
+    }
+
+    .feature-list{
+      display:grid;
+      gap:14px;
+      margin-top:8px;
+    }
+
+    .feature-row{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:#fff;
+    }
+
+    .feature-icon{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:var(--accent-soft);
+      color:var(--accent-dark);
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      flex:0 0 auto;
+    }
+
+    .feature-row strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:15px;
+    }
+
+    .feature-row span{
+      color:#5d554d;
+      font-size:14px;
+      line-height:1.55;
+    }
+
+    .ih-header{
+      text-align:center;
+      max-width:920px;
+      margin:0 auto 28px;
+    }
+
+    .ih-header p{
+      margin:0;
+      color:#4b443d;
+      font-size:17px;
+      line-height:1.7;
+    }
+
+    .ih-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-top:24px;
+    }
+
+    .ih-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:0 8px 20px rgba(0,0,0,.04);
+      transition:transform .25s ease;
+    }
+
+    .ih-card:hover{
+      transform:translateY(-2px);
+    }
+
+    .ih-icon{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      margin-bottom:16px;
+      font-size:13px;
+    }
+
+    .ih-card h4{
+      margin:0 0 10px;
+      font-size:19px;
+    }
+
+    .ih-card p{
+      margin:0;
+      color:#564f47;
+      line-height:1.62;
+      font-size:15px;
+    }
+
+    .ih-highlight{
+      margin-top:24px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+      color:white;
+      padding:28px;
+      border-radius:24px;
+    }
+
+    .ih-highlight h4{
+      margin:0 0 10px;
+      font-size:24px;
+    }
+
+    .ih-highlight p{
+      margin:0;
+      font-size:16px;
+      line-height:1.75;
+      max-width:900px;
+    }
+
+    .quote{
+      background:linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color:#fff;
+      border-radius:28px;
+      padding:30px;
+      box-shadow:var(--shadow);
+      margin-top:28px;
+    }
+
+    .quote p{
+      margin:0;
+      font-size:24px;
+      line-height:1.5;
+      max-width:950px;
+    }
+
+    .footer{
+      margin-top:28px;
+      padding:24px;
+      border-radius:24px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .footer p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    code{
+      background:#f3ece2;
+      padding:2px 6px;
+      border-radius:8px;
+    }
+
+    @media (max-width:980px){
+      .hero,.grid-4,.grid-3,.grid-2,.image-grid,.ih-grid{
+        grid-template-columns:1fr !important;
+      }
+      .hero h2{font-size:38px}
+      .hero-points{grid-template-columns:1fr}
+    }
+
+    @media (max-width:640px){
+      .wrap{padding:18px 14px 36px}
+      .section,.hero-copy,.hero-visual{padding:20px}
+      .hero h2{font-size:32px}
+      .section h3{font-size:26px}
+      .quote p{font-size:20px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">AX</div>
+        <div>
+          <h1>Axiora</h1>
+          <p>Desarrollo humano, catalización certificada e IA aplicada</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#que-es">Qué es</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#ia">IA Axiora</a>
+        <a href="#catalizadores">Catalizadores</a>
+        <a href="#ih-rrhh">IH RRHH</a>
+        <a href="#certificaciones">Certificaciones</a>
+        <a href="#equipos">Equipos</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Programa metodológico</span>
+        <h2>Axiora convierte la reflexión en una experiencia guiada, estructurada y aplicable a personas, equipos y cultura organizacional.</h2>
+        <p class="lead">
+          Axiora integra el juego de las 33 virtudes, una red de Catalizadores Axiora y una herramienta de IA personalizable con documentos, artículos, libros, estrategias y contenidos propios de cada organización.
+        </p>
+
+        <div class="hero-points">
+          <div class="mini-card">
+            <strong>Metodología experiencial</strong>
+            <span>Recorridos de siembra, transformación y cosecha para activar conversaciones de alto valor.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Catalización estructurada</strong>
+            <span>Catalizadores Axiora formados para conducir salas, grupos, lecturas y procesos de evolución humana.</span>
+          </div>
+          <div class="mini-card">
+            <strong>IA personalizable</strong>
+            <span>Asistente entrenable con conocimiento institucional, textos propios y marcos estratégicos.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Aplicación corporativa</strong>
+            <span>Útil para talento humano, bienestar, liderazgo, clima, cultura y acompañamiento de equipos.</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#que-es">Explorar Axiora</a>
+          <a class="btn" href="#equipos">Uso corporativo</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="image-card large fallback">
+          <img src="assets/axiora-hero.jpg" alt="Axiora hero" onerror="this.remove(); this.parentElement.classList.add('fallback');">
+        </div>
+        <div class="image-grid">
+          <div class="image-card fallback">
+            <img src="assets/axiora-tablero.jpg" alt="Tablero Axiora" onerror="this.remove(); this.parentElement.classList.add('fallback');">
+          </div>
+          <div class="image-card fallback">
+            <img src="assets/axiora-sesion.jpg" alt="Sesión Axiora" onerror="this.remove(); this.parentElement.classList.add('fallback');">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="que-es" class="section">
+      <h3>¿Qué es Axiora?</h3>
+      <p class="intro">
+        Axiora es una propuesta de desarrollo humano y transformación organizacional que articula una experiencia lúdica, una metodología de acompañamiento y una capa de inteligencia artificial para procesos de reflexión, conversación, aprendizaje y evolución.
+      </p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="tag">Núcleo metodológico</span>
+          <h4>Juego 33 Virtudes</h4>
+          <p>Un recorrido experiencial que permite explorar luces, sombras, propósito, decisiones y patrones personales o grupales a través de estaciones simbólicas.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Núcleo humano</span>
+          <h4>Catalizadores Axiora</h4>
+          <p>El proceso no depende solo del juego: se fortalece con profesionales formados para interpretar dinámicas, sostener conversaciones profundas y dar dirección metodológica al recorrido.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Núcleo tecnológico</span>
+          <h4>Asistente IA Axiora</h4>
+          <p>Una herramienta de IA configurable con conocimiento propio para ampliar análisis, acompañar procesos y sostener continuidad antes, durante y después de cada sala.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3>La lógica de valor de Axiora</h3>
+      <p class="intro">
+        Axiora no se presenta solo como un juego. Se presenta como un sistema vivo de formación, catalización y acompañamiento que ayuda a que la experiencia tenga profundidad, continuidad y capacidad de implementación.
+      </p>
+
+      <div class="grid grid-2">
+        <div class="highlight">
+          <strong>Experiencia transformadora</strong>
+          <p>Cada sala puede abrir conversaciones significativas sobre salud emocional, vínculos, liderazgo, propósito, cambios, conflictos, bienestar y desarrollo humano.</p>
+        </div>
+        <div class="highlight">
+          <strong>Escalabilidad organizacional</strong>
+          <p>El Catalizador puede organizar grupos, crear salas, acompañar múltiples usuarios y utilizar la IA como soporte estructural para sostener calidad y coherencia metodológica.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="section">
+      <h3>¿Cómo funciona Axiora?</h3>
+      <p class="intro">
+        El modelo combina preparación, experiencia guiada y continuidad. No es una dinámica aislada: es un ecosistema que puede usarse en procesos individuales, grupales y corporativos.
+      </p>
+
+      <div class="grid grid-4 steps">
+        <div class="card">
+          <div class="step-number">1</div>
+          <h4>Definición del contexto</h4>
+          <p>Se establece foco, propósito, población objetivo y tipo de intervención: individual, equipos o cultura.</p>
+        </div>
+        <div class="card">
+          <div class="step-number">2</div>
+          <h4>Creación de salas</h4>
+          <p>El Catalizador organiza grupos y dispone salas según número de participantes, objetivos y ruta metodológica.</p>
+        </div>
+        <div class="card">
+          <div class="step-number">3</div>
+          <h4>Experiencia guiada</h4>
+          <p>Las personas recorren el juego, responden preguntas y generan insumos de reflexión acompañados por la catalización metodológica.</p>
+        </div>
+        <div class="card">
+          <div class="step-number">4</div>
+          <h4>Lectura ampliada</h4>
+          <p>La IA personalizada ayuda a consolidar hallazgos, preguntas, patrones y rutas de trabajo según el contexto definido.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ia" class="section">
+      <h3>IA Axiora: conocimiento vivo y personalizable</h3>
+      <p class="intro">
+        Uno de los diferenciales más potentes de Axiora es que no se limita a un chatbot genérico. La solución incluye acceso a una herramienta de IA que puede personalizarse con conocimiento propio de la metodología y con materiales específicos del cliente o del programa.
+      </p>
+
+      <div class="feature-list">
+        <div class="feature-row">
+          <div class="feature-icon">IA</div>
+          <div>
+            <strong>Entrenable con documentos y marcos propios</strong>
+            <span>Puede alimentarse con documentos internos, artículos, libros, manuales, guías, estrategias y contenidos específicos del proceso.</span>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon">KG</div>
+          <div>
+            <strong>Base metodológica de Axiora</strong>
+            <span>La IA se apoya en la estructura del juego, las 33 virtudes, las preguntas de reflexión, los focos temáticos y la lógica de catalización.</span>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon">TR</div>
+          <div>
+            <strong>Trazabilidad de salas y recorridos</strong>
+            <span>Puede conectarse con el conteo total de salas, evolución de grupos, información de respuestas y seguimiento por Catalizador.</span>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon">CX</div>
+          <div>
+            <strong>Adaptación por organización</strong>
+            <span>El cliente puede integrar lenguaje propio, cultura, enfoques de bienestar, liderazgo, talento humano y objetivos de formación.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3>¿Qué incluye la solución Axiora?</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>Componente metodológico</h4>
+          <ul>
+            <li>Juego y estructura de recorrido</li>
+            <li>Preguntas de reflexión y profundización</li>
+            <li>Focos temáticos y propósito de sala</li>
+            <li>Uso grupal, individual y corporativo</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Componente tecnológico</h4>
+          <ul>
+            <li>Acceso a plataforma de salas</li>
+            <li>Creación y gestión de grupos por Catalizador</li>
+            <li>Herramienta de IA personalizable</li>
+            <li>Soporte para trazabilidad y continuidad</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Componente humano</h4>
+          <ul>
+            <li>Formación de Catalizadores Axiora</li>
+            <li>Marco de lectura e intervención</li>
+            <li>Aplicación ética y responsable</li>
+            <li>Prácticas de acompañamiento conversacional</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Componente estratégico</h4>
+          <ul>
+            <li>Implementación en talento humano</li>
+            <li>Programas de bienestar y liderazgo</li>
+            <li>Procesos de cultura organizacional</li>
+            <li>Desarrollo de entornos de aprendizaje</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalizadores" class="section">
+      <div class="ih-header">
+        <span class="eyebrow">Rol transformador</span>
+        <h3>Catalizadores Axiora</h3>
+        <p>
+          Los <strong>Catalizadores Axiora</strong> son profesionales certificados para activar procesos de transformación humana y organizacional mediante la metodología Axiora.
+          No son únicamente guías del juego: son agentes formados para interpretar dinámicas, sostener conversaciones profundas y acompañar cambios con criterio metodológico, sensibilidad humana y visión estratégica.
+        </p>
+      </div>
+
+      <div class="ih-grid">
+        <div class="ih-card">
+          <div class="ih-icon">01</div>
+          <h4>Activan experiencias transformadoras</h4>
+          <p>Conducen salas y recorridos vivenciales que generan reflexión, conciencia y evolución en personas, equipos y organizaciones.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">02</div>
+          <h4>Interpretan procesos humanos</h4>
+          <p>Leen dinámicas individuales y grupales para orientar conversaciones significativas, identificar tensiones y abrir rutas de comprensión.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">03</div>
+          <h4>Conectan propósito con acción</h4>
+          <p>Traducen reflexiones en decisiones, aprendizajes y acciones aplicables a contextos personales, corporativos y organizacionales.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">04</div>
+          <h4>Movilizan cambios sostenibles</h4>
+          <p>No imponen respuestas: crean condiciones para que emerjan comprensiones profundas, decisiones auténticas y transformaciones duraderas.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">05</div>
+          <h4>Integran IA Axiora</h4>
+          <p>Utilizan la IA Axiora como soporte para ampliar análisis, enriquecer lecturas y sostener continuidad metodológica antes, durante y después de cada sala.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">06</div>
+          <h4>Escalan impacto organizacional</h4>
+          <p>Se convierten en agentes clave para fortalecer cultura, mejorar clima, acompañar liderazgo y dinamizar procesos de talento humano.</p>
+        </div>
+      </div>
+
+      <div class="ih-highlight">
+        <h4>Definición institucional</h4>
+        <p>
+          Un <strong>Catalizador Axiora</strong> es un profesional certificado capaz de activar procesos de transformación humana mediante experiencias guiadas, inteligencia humanista e inteligencia artificial aplicada.
+        </p>
+      </div>
+    </section>
+
+    <section id="ih-rrhh" class="section">
+      <div class="ih-header">
+        <span class="eyebrow">IH Inteligencia Humanista</span>
+        <h3>Intervención estratégica en RRHH</h3>
+        <p>
+          Transformamos los procesos de gestión humana en experiencias de evolución organizacional, integrando metodologías experienciales, catalización especializada e inteligencia artificial aplicada.
+        </p>
+      </div>
+
+      <div class="ih-grid">
+        <div class="ih-card">
+          <div class="ih-icon">01</div>
+          <h4>Planificación estratégica</h4>
+          <p>Alineamos talento, estructura organizacional y objetivos de crecimiento para fortalecer el desarrollo sostenible de la organización.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">02</div>
+          <h4>Mejora del clima organizacional</h4>
+          <p>Diagnosticamos dinámicas internas, identificamos tensiones y diseñamos acciones que mejoran el bienestar, la convivencia y la confianza laboral.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">03</div>
+          <h4>Resolución de conflictos</h4>
+          <p>Facilitamos procesos de transformación de conflictos desde una mirada humanista, promoviendo comunicación efectiva y acuerdos sostenibles.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">04</div>
+          <h4>Evaluaciones de desempeño</h4>
+          <p>Diseñamos evaluaciones integrales que valoran resultados, competencias humanas, evolución individual y contribución real al equipo.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">05</div>
+          <h4>Team building</h4>
+          <p>Fortalecemos equipos mediante experiencias guiadas que mejoran cohesión, confianza, liderazgo, colaboración y lectura de dinámicas internas.</p>
+        </div>
+
+        <div class="ih-card">
+          <div class="ih-icon">06</div>
+          <h4>Feedback de procesos</h4>
+          <p>Creamos espacios estructurados de retroalimentación para optimizar prácticas, revisar flujos internos y fortalecer el aprendizaje organizacional.</p>
+        </div>
+      </div>
+
+      <div class="ih-highlight">
+        <h4>¿Cómo intervenimos?</h4>
+        <p>
+          A través de Axiora y nuestras metodologías de Inteligencia Humanista combinamos lectura organizacional, catalización especializada, herramientas de IA personalizable y experiencias transformadoras para generar impacto real en las organizaciones.
+        </p>
+      </div>
+    </section>
+
+    <section id="certificaciones" class="section">
+      <h3>Certificaciones y ruta de formación</h3>
+      <p class="intro">
+        Axiora requiere mucho más que conocer el juego. Por eso la propuesta contempla una ruta de capacitación para asegurar una aplicación seria, ética y metodológicamente sólida.
+      </p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="tag">Nivel 1</span>
+          <h4>Fundamentos Axiora</h4>
+          <p>Comprensión del modelo, las 33 virtudes, los focos de trabajo, la lectura de la experiencia y la lógica de la sala.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Nivel 2</span>
+          <h4>Certificación de Catalizadores Axiora</h4>
+          <p>Activación de grupos, lectura del proceso, manejo del ritmo, preguntas poderosas y acompañamiento de conversaciones profundas.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Nivel 3</span>
+          <h4>Uso de IA y trazabilidad</h4>
+          <p>Integración de la IA Axiora, uso de materiales propios, análisis de recorridos y aplicación de conocimiento institucional.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="equipos" class="section">
+      <h3>¿Por qué Axiora es valioso para talento humano y equipos corporativos?</h3>
+      <p class="intro">
+        Axiora permite trabajar desarrollo humano con una estructura concreta. No se queda en discurso inspiracional: facilita interacción, activa preguntas, recoge respuestas y abre rutas de mejora aplicables a equipos reales.
+      </p>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <h4>Talento humano</h4>
+          <p>Útil para programas de bienestar, acompañamiento, conversaciones de clima, fortalecimiento del vínculo y procesos de desarrollo humano.</p>
+        </div>
+        <div class="card">
+          <h4>Liderazgo y cultura</h4>
+          <p>Ayuda a trabajar propósito, comunicación, manejo de tensiones, autorreflexión, conciencia de equipo y alineación cultural.</p>
+        </div>
+        <div class="card">
+          <h4>Equipos corporativos</h4>
+          <p>Sirve para integrar grupos, abrir espacios de escucha, acompañar cambios y favorecer conversaciones que normalmente no se dan en formatos tradicionales.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote">
+      <p>
+        Axiora no solo forma personas para usar un juego. Forma Catalizadores capaces de conducir experiencias con criterio metodológico, profundidad humana y apoyo de inteligencia artificial personalizable.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <p>
+        <strong>Axiora</strong><br>
+        Desarrollo humano · Catalización · IA aplicada · Cultura organizacional
+      </p>
+      <p>
+        Sitio listo para GitHub Pages.<br>
+        Reemplaza las imágenes de <code>assets/axiora-hero.jpg</code>, <code>assets/axiora-tablero.jpg</code> y <code>assets/axiora-sesion.jpg</code> por tus visuales finales.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
